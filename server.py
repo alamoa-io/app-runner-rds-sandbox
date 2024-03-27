@@ -7,30 +7,22 @@ import mysql.connector
 
 import os
 
-DATABASE_REGION = 'us-east-1'
 DATABASE_CERT = 'cert/us-east-1-bundle.pem'
 DATABASE_HOST = os.environ['DATABASE_HOST']
 DATABASE_PORT = os.environ['DATABASE_PORT']
 DATABASE_USER = os.environ['DATABASE_USER']
+DATABASE_PASS = os.environ['DATABASE_PASS']
 DATABASE_NAME = os.environ['DATABASE_NAME']
 
 os.environ['LIBMYSQL_ENABLE_CLEARTEXT_PLUGIN'] = '1'
 
 PORT = int(os.environ.get('PORT'))
 
-rds = boto3.client('rds')
-
 try:
-    token = rds.generate_db_auth_token(
-        DBHostname=DATABASE_HOST,
-        Port=DATABASE_PORT,
-        DBUsername=DATABASE_USER,
-        Region=DATABASE_REGION
-    )
     mydb =  mysql.connector.connect(
         host=DATABASE_HOST,
         user=DATABASE_USER,
-        passwd=token,
+        passwd=DATABASE_PASS,
         port=DATABASE_PORT,
         database=DATABASE_NAME,
         ssl_ca=DATABASE_CERT
