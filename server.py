@@ -7,8 +7,7 @@ import mysql.connector
 
 import os
 
-# DATABASE_CERT = 'cert/us-east-1-bundle.pem'
-DATABASE_CERT = ''
+DATABASE_CERT = 'cert/us-east-1-bundle.pem'
 DATABASE_HOST = os.environ['DATABASE_HOST']
 DATABASE_PORT = os.environ['DATABASE_PORT']
 DATABASE_USER = os.environ['DATABASE_USER']
